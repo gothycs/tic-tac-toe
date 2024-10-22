@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-    const tiles = Array.from(document.querySelectorAll('.tile'));
+    const squares = Array.from(document.querySelectorAll('.square'));
     const playerDisplay = document.querySelector('.display-player');
     const resetBtn = document.querySelector('#reset');
     const msg = document.querySelector('.announcer');
@@ -52,10 +52,10 @@ window.addEventListener('DOMContentLoaded', () => {
         msg.classList.remove('hide');
     }
 
-    function handleMove(tile, index) {
-        if (tile.innerText === '' && gameActive) {
-            tile.innerText = currentPlayer;
-            tile.classList.add(`player${currentPlayer}`); 
+    function handleMove(square, index) {
+        if (square.innerText === '' && gameActive) {
+            square.innerText = currentPlayer;
+            square.classList.add(`player${currentPlayer}`); 
             board[index] = currentPlayer;
             checkWinner();
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -67,16 +67,16 @@ window.addEventListener('DOMContentLoaded', () => {
         board = ['', '', '', '', '', '', '', '', ''];
         gameActive = true;
         msg.classList.add('hide');
-        tiles.forEach(tile => {
-            tile.innerText = '';
-            tile.classList.remove('playerX', 'playerO');
+        squares.forEach(square => {
+            square.innerText = '';
+            square.classList.remove('playerX', 'playerO');
         });
         currentPlayer = 'X';
         playerDisplay.innerText = currentPlayer;
     }
 
-    tiles.forEach((tile, index) => {
-        tile.addEventListener('click', () => handleMove(tile, index));
+    squares.forEach((square, index) => {
+        square.addEventListener('click', () => handleMove(square, index));
     });
 
     resetBtn.addEventListener('click', resetGame);
